@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080e1b">
+<title>NEWS RADAR | Economic Intelligence</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#080e1b;
+  color:#eaf0fa;
+  font-family:Arial,sans-serif;
+  padding:18px;
+}
+.container{max-width:1050px;margin:auto}
+header{
+ display:flex;justify-content:space-between;
+ align-items:center;flex-wrap:wrap;gap:12px;
+ margin-bottom:25px;
+}
+.logo{font-size:25px;font-weight:800;color:#54c8ff}
+.logo span{color:white}
+.live{color:#39d99b;font-size:12px}
+.clock{color:#a8b8ce;font-size:13px;margin-top:6px}
+.card{
+ background:#111c2e;
+ border:1px solid #26354b;
+ border-radius:13px;padding:17px;
+ margin-bottom:16px;
+}
+h2{font-size:18px;margin-bottom:15px}
+.stats{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:12px;margin-bottom:18px;
+}
+.stat{background:#17253a;border-radius:10px;padding:15px}
+.stat small{color:#a6b5ca}
+.stat h2{color:#55c6ff;margin:10px 0 0}
+.highlight{
+ background:linear-gradient(120deg,#173b61,#17253a);
+ border:1px solid #28547d;
+}
+.highlight h1{font-size:25px;margin:12px 0}
+.muted{color:#aab9ce;font-size:13px;line-height:1.6}
+.badge{
+ display:inline-block;padding:5px 9px;
+ border-radius:6px;font-size:11px;
+ background:#42351c;color:#ffd36b;
+}
+.controls{
+ display:flex;gap:9px;flex-wrap:wrap;
+ margin-bottom:15px;
+}
+input,select{
+ background:#0b1525;color:white;
+ border:1px solid #30415a;
+ padding:11px;border-radius:8px;
+ min-width:130px;flex:1;
+}
+table{width:100%;border-collapse:collapse;min-width:650px}
+th,td{
+ text-align:left;padding:13px 10px;
+ border-bottom:1px solid #26354b;
+ font-size:13px;
+}
+th{color:#8fa6c3}
+td{color:#e0e9f7}
+.table-wrap{overflow-x:auto}
+.positive{color:#39d99b}
+.negative{color:#ff7272}
+.neutral{color:#ffd36b}
+.impact{
+ background:#17253a;padding:15px;
+ border-radius:10px;line-height:1.7;
+}
+footer{text-align:center;color:#778ba5;font-size:12px;padding:20px}
+@media(max-width:600px){
+ body{padding:12px}
+ .stats{grid-template-columns:1fr}
+ header{align-items:flex-start}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header>
+ <div>
+  <div class="logo">NEWS <span>RADAR</span></div>
+  <div class="clock" id="clock">Loading IST...</div>
+ </div>
+ <div class="live">● PERSONAL DASHBOARD</div>
+</header>
+
+<div class="card highlight">
+ <span class="badge">ECONOMIC INTELLIGENCE</span>
+ <h1>Gold Market Radar</h1>
+ <p class="muted">
+  Track US economic news, understand inflation,
+  employment data and their possible impact on XAUUSD.
+ </p>
+</div>
+
+<div class="stats">
+ <div class="stat">
+  <small>UPCOMING EVENTS</small>
+  <h2 id="eventCount">5</h2>
+ </div>
+ <div class="stat">
+  <small>HIGH IMPACT</small>
+  <h2>3</h2>
+ </div>
+ <div class="stat">
+  <small>TIMEZONE</small>
+  <h2>IST 🇮🇳</h2>
+ </div>
+</div>
+
+<div class="card">
+ <h2>📅 Economic Calendar</h2>
+
+ <div class="controls">
+  <input id="search" placeholder="Search news...">
+  <select id="filter">
+   <option value="all">All News</option>
+   <option value="high">High Impact</option>
+   <option value="medium">Medium Impact</option>
+  </select>
+ </div>
+
+ <div class="table-wrap">
+ <table>
+  <thead>
+   <tr>
+    <th>NEWS</th>
+    <th>COUNTRY</th>
+    <th>IMPACT</th>
+    <th>FORECAST</th>
+    <th>PREVIOUS</th>
+    <th>ACTUAL</th>
+   </tr>
+  </thead>
+  <tbody id="newsTable"></tbody>
+ </table>
+ </div>
+ <p class="muted" style="margin-top:12px">
+  ⚠️ Demo data only. These are not verified upcoming releases.
+ </p>
+</div>
+
+<div class="card">
+ <h2>📊 Understanding Gold Impact</h2>
+ <div class="impact">
+  <p class="positive">↓ Inflation lower than expected</p>
+  <p class="muted">Dollar weakness may support Gold.</p>
+  <br>
+  <p class="negative">↑ Inflation higher than expected</p>
+  <p class="muted">Dollar strength may pressure Gold.</p>
+  <br>
+  <p class="neutral">⚠ Mixed economic signals</p>
+  <p class="muted">Market reaction can be uncertain.</p>
+ </div>
+</div>
+
+<div class="card">
+ <h2>📚 News Learning Center</h2>
+ <p class="muted">
+  <b>NFP:</b> US employment report.<br><br>
+  <b>CPI:</b> Consumer inflation report.<br><br>
+  <b>Core CPI:</b> Inflation excluding food and energy.<br><br>
+  <b>PPI:</b> Producer price inflation.<br><br>
+  <b>PCE:</b> Personal Consumption Expenditures price index.<br><br>
+  <b>FOMC:</b> Federal Reserve monetary policy decisions.
+ </p>
+</div>
+
+<footer>
+ NEWS RADAR · Personal Economic Intelligence<br>
+ Data integration pending · Not financial advice
+</footer>
+
+</div>
+
+<script>
+const events = [
+ {name:"Non-Farm Payrolls (NFP)",country:"USA",impact:"high",forecast:"Demo",previous:"Demo",actual:"—"},
+ {name:"Consumer Price Index (CPI)",country:"USA",impact:"high",forecast:"Demo",previous:"Demo",actual:"—"},
+ {name:"Core CPI",country:"USA",impact:"high",forecast:"Demo",previous:"Demo",actual:"—"},
+ {name:"Producer Price Index (PPI)",country:"USA",impact:"medium",forecast:"Demo",previous:"Demo",actual:"—"},
+ {name:"FOMC Meeting",country:"USA",impact:"high",forecast:"—",previous:"Demo",actual:"—"}
+];
+
+function render(){
+ const search=document.getElementById("search").value.toLowerCase();
+ const filter=document.getElementById("filter").value;
+
+ const rows=events.filter(e=>
+  e.name.toLowerCase().includes(search) &&
+  (filter==="all" || e.impact===filter)
+ );
+
+ document.getElementById("eventCount").textContent=rows.length;
+
+ document.getElementById("newsTable").innerHTML=rows.map(e=>`
+ <tr>
+  <td>${e.name}</td>
+  <td>${e.country}</td>
+  <td class="${e.impact==="high"?"negative":"neutral"}">
+   ${e.impact.toUpperCase()}
+  </td>
+  <td>${e.forecast}</td>
+  <td>${e.previous}</td>
+  <td>${e.actual}</td>
+ </tr>
+ `).join("");
+}
+
+document.getElementById("search").addEventListener("input",render);
+document.getElementById("filter").addEventListener("change",render);
+
+function updateClock(){
+ document.getElementById("clock").textContent=
+  new Date().toLocaleString("en-IN",{
+   timeZone:"Asia/Kolkata",
+   dateStyle:"full",
+   timeStyle:"medium"
+  })+" IST";
+}
+updateClock();
+setInterval(updateClock,1000);
+render();
+</script>
+
+</body>
+</html>
